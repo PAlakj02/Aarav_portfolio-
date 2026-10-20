@@ -5,27 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Aarav Jain</title>
   <meta name="description" content="Aarav Jain — Innovator, Researcher, Debater, Swimmer.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preload" href="fonts/Gilroy-Heavy.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="images/aarav.webp" as="image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
 </head>
 <body class="home">
-  <main class="hero">
-    <div class="hero-grid">
+  <main style="padding-bottom:0">
+    <section class="hero">
       <div class="hero-left">
-        <h1 class="hero-name"><span class="filled">AARAV</span><span class="outline">JAIN</span><span class="dot"></span></h1>
-        <p class="hero-tag">I am an Innovator, Researcher,<br>Debater, Swimmer!</p>
+        <h1 class="hero-name"><span>AARAV</span><span>JAIN<span class="sq-dot" style="display:inline-block"></span></span></h1>
+        <p class="hero-tag">I am an Innovator,<br>Researcher, Debater,<br>Swimmer!</p>
         <hr>
-        <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn" href="docs/resume.pdf" target="_blank" rel="noopener">Resume</a>
       </div>
       <div class="hero-photo">
-        <img src="images/aarav.png" alt="Portrait of Aarav Jain">
+        <img src="images/aarav.webp" alt="Portrait of Aarav Jain" width="756" height="1134" fetchpriority="high">
       </div>
-      <p class="hero-about">I explore how Engineering and Entrepreneurship can turn ideas into practical solutions for cleaner water, sustainable agriculture and a circular economy.</p>
-    </div>
-    <a class="band" href="projects.html">TURNING INNOVATION INTO IMPACT <span class="arrow">→</span></a>
+      <p class="hero-about">I explore how Engineering and human behaviour intersect.<br>How entrepreneurial pursuits can turn technical innovations into solutions for the people of our society and benefit environment.</p>
+    </section>
+
+    <div class="band"><span>IDEATE-INNOVATE-FACILITATE - FOR IMPACT</span></div>
+
+    <section class="cards" aria-label="Projects and research">
+      <div class="cards-row r4">
+        <a class="card reveal" href="smart-irrigation.html">
+          <img class="c-logo" src="images/home-si.webp" alt="Smart Irrigation — FarmTech for Rural India, CREST Awards" width="502" height="144" loading="lazy">
+          <p>Designed and build an affordable, automated irrigation system that intelligently dispenses water based on soil moisture levels.</p>
+        </a>
+        <a class="card side reveal" href="arsenic-filtration.html">
+          <img class="c-bottle" src="images/home-bottle.webp" alt="Illustration of the portable filter bottle" width="174" height="419" loading="lazy">
+          <p>Designed, built and filed for patent a portable bottle filter for arsenic, other heavy metals and turbidity from drinking water.</p>
+        </a>
+        <a class="card reveal" href="plarick.html">
+          <img class="c-logo" src="images/home-plarick.webp" alt="Plarick — Imperial STEMathon" width="504" height="214" loading="lazy">
+          <p>Transformed plastic waste into sustainable, affordable eco-friendly building material. Meeting SDG goals.</p>
+        </a>
+        <a class="card side reveal" href="stem-in-action.html">
+          <img class="c-book" src="images/home-book.webp" alt="Book cover: The Science that wins Matches" width="270" height="384" loading="lazy">
+          <p>Authored a book that explains science concepts through sports.</p>
+        </a>
+      </div>
+      <div class="cards-row r3">
+        <a class="card reveal" href="research-microplastics.html">
+          <p>Designed and installed a community system for removal of microplastics from water using biopolymer- MORINGA.</p>
+          <img class="c-micro" src="images/home-micro.webp" alt="Diagram of the community microplastic filtration system" width="547" height="235" loading="lazy">
+        </a>
+        <a class="card reveal" href="research-microplastics.html">
+          <span class="label">Research Paper</span>
+          <p>Bioinformatics-Guided Comparative Analysis of Moringa and Tamarind for Microplastic Removal.</p>
+          <img class="journal" src="images/ijhsr.webp" alt="IJHSR" loading="lazy">
+        </a>
+        <a class="card reveal" href="research-lead-filtration.html">
+          <span class="label">Research Paper</span>
+          <p>Comparative Evaluation of Lead Removal from Contaminated Water by Chemical Precipitation Using Different Reagents under Varying pH and Dosage Conditions.</p>
+          <img class="journal" src="images/oxford.webp" alt="Oxford Journal of Student Scholarship" loading="lazy">
+        </a>
+      </div>
+    </section>
+
+    <section class="grid-paper">
+      <div class="paper-wrap">
+        <div class="paper crushed">
+          <p class="poem">To flow like water…<br>To find a path or create it<br>To forge ahead<br>And carry along.<br>To affect life.</p>
+          <p class="story">Water has been my biggest teacher.<br>As we live and grow, we learn about the problems of the world. And my mind immediately snaps into problem-solving mode. Then I flow from innovator to communicator, as I work with the community to understand, create, improvise and implement the solution. And then I wear the last hat - of an entrepreneur - to make the solution a feasible reality.</p>
+        </div>
+      </div>
+    </section>
   </main>
 </body>
 </html>
