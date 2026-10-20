@@ -128,7 +128,7 @@ function wireContactForm(form) {
 function buildFooter() {
   const connect = document.createElement('div');
   connect.className = 'connect';
-  connect.innerHTML = `<a class="connect-pill" href="contact.html" data-contact>Let’s Connect<span class="sq-dot"></span></a>`;
+  connect.innerHTML = `<a class="connect-pill" href="contact.html" data-contact>Let’s Connect</a>`;
   const grid = document.querySelector('.grid-paper');
   (grid || document.body).append(connect);
 
