@@ -458,18 +458,12 @@ main.container { padding-bottom: 110px; } /* .container padding shorthand was ze
 .awards-photos .p { grid-column: span 2; aspect-ratio: 762 / 1038; }
 .awards-photos .l { grid-column: span 3; aspect-ratio: 1146 / 765; }
 .awards-photos .xl { grid-column: span 4; }
-/* layout 2: wide rounded boxes */
-.v2 .awards-layout { grid-template-columns: minmax(0, 620px) 200px; justify-content: start; padding-left: 4%; }
-.v2 .aw-cat, .v2 .aw-cert { border-radius: 14px; }
-/* layout 3: black heading pills, square boxes */
+/* black heading pills, square boxes */
 .v3 .aw-head { background: var(--ink); color: #fff; border-radius: 4px; padding: 4px 0; }
 .v3 .aw-cat, .v3 .aw-cert { border-radius: 0; border-color: #c9c4ba; }
 .v3 .awards-layout { grid-template-columns: minmax(0, 600px) 200px; }
-.layout-switch { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 18px; font-family: var(--font-gilroy); font-size: 14px; color: var(--muted); }
-.layout-switch a { text-decoration: none; border: 1.5px solid var(--ink); color: var(--ink); padding: 2px 10px; border-radius: 4px; transition: background-color .3s, color .3s; }
-.layout-switch a:hover, .layout-switch a.on { background: var(--ink); color: #fff; }
 @media (max-width: 760px) {
-  .awards-layout, .v2 .awards-layout, .v3 .awards-layout { grid-template-columns: minmax(0, 1fr) 72px; gap: 0 10px; padding-left: 0; }
+  .awards-layout, .v3 .awards-layout { grid-template-columns: minmax(0, 1fr) 72px; gap: 0 10px; padding-left: 0; }
   .aw-head { font-size: 17px; }
   .aw-toggle { font-size: 16px; padding: 8px 12px; }
   .aw-cert .plus { display: none; }

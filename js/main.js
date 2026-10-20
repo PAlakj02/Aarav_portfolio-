@@ -21,7 +21,7 @@ const NAV = [
       { label: 'Courses & Pre-Professional Experiences', href: 'pre-professional-experiences.html' },
     ],
   },
-  { label: 'Awards', href: 'awards.html', also: ['awards-2.html', 'awards-3.html'] },
+  { label: 'Awards', href: 'awards.html' },
   { label: 'Contact', href: 'contact.html' },
 ];
 
