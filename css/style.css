@@ -117,6 +117,7 @@ b, strong { font-weight: 700; }
 .container { max-width: 1300px; margin: 0 auto; padding: 0 32px; }
 @media (max-width: 700px) { .container { padding: 0 16px; } body { font-size: 17px; } }
 main { padding-bottom: 72px; }
+main.container { padding-bottom: 110px; } /* .container padding shorthand was zeroing this, so buttons touched the footer */
 
 /* Black label (section headings like "Innovation") */
 .pill {
