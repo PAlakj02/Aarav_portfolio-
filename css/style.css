@@ -320,7 +320,7 @@ main { padding-bottom: 72px; }
 }
 .paper .poem { font-family: var(--font-gilroy); font-weight: 700; font-size: clamp(20px, 2.4vw, 32px); line-height: 1.45; }
 .paper .story { font-size: clamp(17px, 1.75vw, 24px); line-height: 1.55; max-width: 1180px; }
-.grid-paper .connect { padding-top: 130px; }
+.grid-paper { padding-bottom: 120px; }
 
 /* The "opening" — paper starts as a crushed ball and unfolds (≈1.4s total) */
 .paper.crushed::before { transform: scale(.14) rotate(-28deg); border-radius: 46%; filter: brightness(.55) contrast(1.6); opacity: 0; }

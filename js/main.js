@@ -126,11 +126,13 @@ function wireContactForm(form) {
 }
 
 function buildFooter() {
-  const connect = document.createElement('div');
-  connect.className = 'connect';
-  connect.innerHTML = `<a class="connect-pill" href="contact.html" data-contact>Let’s Connect</a>`;
-  const grid = document.querySelector('.grid-paper');
-  (grid || document.body).append(connect);
+  // "Let's Connect" only on the Contact page.
+  if (currentPage() === 'contact.html') {
+    const connect = document.createElement('div');
+    connect.className = 'connect';
+    connect.innerHTML = `<a class="connect-pill" href="contact.html" data-contact>Let’s Connect</a>`;
+    document.body.append(connect);
+  }
 
   const footer = document.createElement('footer');
   footer.className = 'site-footer';
