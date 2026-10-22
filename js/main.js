@@ -10,18 +10,12 @@ const NAV = [
     ],
   },
   {
-    label: 'Research Papers', children: [
+    label: 'Research', children: [
       { label: 'Bioinformatics-Based Microplastic Filtration', href: 'research-microplastics.html' },
       { label: 'Lead Filtration', href: 'research-lead-filtration.html' },
     ],
   },
-  {
-    label: 'Beyond Academics', children: [
-      { label: 'Leadership', href: 'leadership.html' },
-      { label: 'Courses & Pre-Professional Experiences', href: 'pre-professional-experiences.html' },
-    ],
-  },
-  { label: 'Awards', href: 'awards.html' },
+  { label: 'Courses & Internships', href: 'pre-professional-experiences.html' },
   { label: 'Contact', href: 'contact.html' },
 ];
 
@@ -136,7 +130,14 @@ function buildFooter() {
 
   const footer = document.createElement('footer');
   footer.className = 'site-footer';
-  footer.innerHTML = `
+  // Home page uses a single slim bar: envelope + email + LinkedIn.
+  if (document.body.classList.contains('home')) footer.classList.add('slim');
+  footer.innerHTML = footer.classList.contains('slim') ? `
+    <div class="footer-slim">
+      <button class="mail-btn" type="button" data-contact aria-label="Open contact form">${ENVELOPE}</button>
+      <a href="mailto:${EMAIL}">${EMAIL}</a>
+      <a class="linkedin" href="${LINKEDIN}" target="_blank" rel="noopener" aria-label="LinkedIn">Linked<span>in</span></a>
+    </div>` : `
     <div class="footer-inner">
       <div class="footer-text">If you are interested in innovation,<br>design, outreach or the environment,<br>please contact me.<br>We can collaborate and create more<br>solutions for the future.</div>
       <div class="footer-contact">
@@ -178,18 +179,32 @@ function wireOfficeLinks() {
   });
 }
 
-// Fade sections in as they scroll into view; unfold the crushed paper once.
+// Slow fade-up as each block scrolls into view (jayveerkochhar.com style: one element at a time, 1.25s).
+const REVEAL = [
+  'main .page-title', 'main .lead', 'main .proj-head', 'main .award-won', 'main .pill', 'main .section > p',
+  'main .section > ul', 'main img', 'main .card', 'main .btn', 'main .boxed', 'main .entry', 'main .h2',
+  'main .programs', 'main .plants figure', 'main .research > p', 'main .chem > p', 'main .text > p',
+  'main .stem-top p', 'main .aw-head', 'main .aw-cat', 'main .aw-cert', 'main .big-link', 'main .tested',
+].join(',');
 function wireReveals() {
-  const els = document.querySelectorAll('.reveal, .paper.crushed');
-  if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('in', 'unfold')); return; }
-  const io = new IntersectionObserver(entries => entries.forEach(en => {
-    if (!en.isIntersecting) return;
-    const el = en.target;
-    if (el.classList.contains('paper')) { el.classList.remove('crushed'); el.classList.add('unfold'); }
-    else el.classList.add('in');
-    io.unobserve(el);
-  }), { threshold: 0.18 });
-  els.forEach(el => io.observe(el));
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  // Skip anything inside a block that is already animating, so nothing fades twice.
+  const els = [...document.querySelectorAll(REVEAL)].filter((el, _, all) => !all.some(p => p !== el && p.contains(el)));
+  let batch = 0;
+  const io = new IntersectionObserver(entries => {
+    entries.filter(en => en.isIntersecting).forEach(en => {
+      en.target.style.transitionDelay = `${Math.min(batch++, 6) * 0.12}s`;
+      en.target.classList.add('in');
+      // Once it has arrived, hand back to the element's own hover transitions.
+      en.target.addEventListener('transitionend', () => {
+        en.target.classList.remove('reveal', 'in');
+        en.target.style.transitionDelay = '';
+      }, { once: true });
+      io.unobserve(en.target);
+    });
+    batch = 0;
+  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+  els.forEach(el => { el.classList.add('reveal'); io.observe(el); });
 }
 
 // Awards: categories drop down on hover (click/tap also works).
