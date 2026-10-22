@@ -16,6 +16,7 @@ const NAV = [
     ],
   },
   { label: 'Courses & Internships', href: 'pre-professional-experiences.html' },
+  { label: 'Awards', href: 'awards.html' },
   { label: 'Contact', href: 'contact.html' },
 ];
 
