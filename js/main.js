@@ -21,7 +21,7 @@ const NAV = [
 ];
 
 const EMAIL = '2008aaravjain@gmail.com';
-const LINKEDIN = 'https://www.linkedin.com/'; // TODO: replace with Aarav's LinkedIn profile URL
+const LINKEDIN = 'https://www.linkedin.com/in/aarav-jain-a96514319/';
 
 const CARET = '<svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
 const ENVELOPE = '<svg viewBox="0 0 64 46" aria-hidden="true"><rect x="2" y="2" width="60" height="42" rx="3" fill="none" stroke="#D4603A" stroke-width="3"/><path d="M3 4l29 24L61 4M3 43l22-20M61 43L39 23" fill="none" stroke="#D4603A" stroke-width="3"/></svg>';
@@ -105,18 +105,35 @@ function contactFormHTML(id) {
     </form>`;
 }
 
-// No backend: "Send" opens the visitor's email app with the message filled in.
+// No backend: FormSubmit.co emails the message straight to Aarav. If that fails, fall back to the visitor's email app.
 function wireContactForm(form) {
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const note = form.querySelector('.form-note');
+    const btn = form.querySelector('button[type="submit"]');
     const { name, email, message } = Object.fromEntries(new FormData(form));
     if (!name.trim() || !email.trim() || !message.trim()) { note.textContent = 'Please fill in your name, email and message.'; return; }
     if (!/^\S+@\S+\.\S+$/.test(email)) { note.textContent = 'Please enter a valid email address.'; return; }
     const subject = `Website enquiry from ${name}`;
-    const body = `${message}\n\n— ${name} (${email})`;
-    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    note.textContent = 'Opening your email app… If nothing happens, write to ' + EMAIL;
+    btn.disabled = true;
+    note.textContent = 'Sending…';
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name, email, message, _subject: subject, _replyto: email, _template: 'table', _captcha: 'false' }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || String(data.success) !== 'true') throw new Error(data.message || 'send failed');
+      form.reset();
+      note.textContent = 'Thank you! Your message has been sent.';
+    } catch {
+      const body = `${message}\n\n— ${name} (${email})`;
+      location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      note.textContent = 'Opening your email app… If nothing happens, write to ' + EMAIL;
+    } finally {
+      btn.disabled = false;
+    }
   });
 }
 
@@ -142,9 +159,11 @@ function buildFooter() {
     <div class="footer-inner">
       <div class="footer-text">If you are interested in innovation,<br>design, outreach or the environment,<br>please contact me.<br>We can collaborate and create more<br>solutions for the future.</div>
       <div class="footer-contact">
-        <button class="mail-btn" type="button" data-contact aria-label="Open contact form">${ENVELOPE}</button>
         <div class="footer-links">
-          <a href="mailto:${EMAIL}">${EMAIL}</a>
+          <div class="mail-col">
+            <button class="mail-btn" type="button" data-contact aria-label="Open contact form">${ENVELOPE}</button>
+            <a href="mailto:${EMAIL}">${EMAIL}</a>
+          </div>
           <a class="linkedin" href="${LINKEDIN}" target="_blank" rel="noopener" aria-label="LinkedIn">Linked<span>in</span></a>
         </div>
       </div>
@@ -169,15 +188,6 @@ function buildFooter() {
 
   const pageForm = document.getElementById('contact-page');
   if (pageForm) { pageForm.innerHTML = contactFormHTML('p'); wireContactForm(pageForm.querySelector('form')); }
-}
-
-// PowerPoint files can't open in a browser tab, so send them through Office's online viewer.
-function wireOfficeLinks() {
-  document.querySelectorAll('a[data-office]').forEach(a => {
-    if (location.protocol.startsWith('http') && !/^(localhost|127\.)/.test(location.hostname)) {
-      a.href = 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(new URL(a.getAttribute('href'), location.href).href);
-    }
-  });
 }
 
 // Slow fade-up as each block scrolls into view (jayveerkochhar.com style: one element at a time, 1.25s).
@@ -220,8 +230,19 @@ function wireAwards() {
   });
 }
 
+// Vercel Web Analytics: page views, countries, referrers and devices (enable it in the Vercel project's Analytics tab).
+function loadAnalytics() {
+  if (!/^(localhost|127\.)/.test(location.hostname) && location.protocol.startsWith('http')) {
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    const s = document.createElement('script');
+    s.defer = true;
+    s.src = '/_vercel/insights/script.js';
+    document.head.append(s);
+  }
+}
+
+loadAnalytics();
 buildNav();
 buildFooter();
-wireOfficeLinks();
 wireReveals();
 wireAwards();
