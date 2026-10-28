@@ -303,6 +303,7 @@ main.container { padding-bottom: 9rem; } /* .container padding shorthand was zer
 .cards-row.r3 .card p { font-size: 1.08rem; line-height: 1.47rem; }
 .card .journal { height: 2.6rem; width: auto; align-self: center; margin-top: auto; mix-blend-mode: multiply; }
 .card .journal[src*="oxford"] { height: 2.4rem; }
+.card .journal[src*="ijhsr"] { height: 2.9rem; } /* taller crop keeps the J tail */
 
 .big-links { display: grid; grid-template-columns: 29.1rem 29.4rem; justify-content: space-between; margin-top: 1rem; }
 .big-link {
@@ -344,6 +345,7 @@ main.container { padding-bottom: 9rem; } /* .container padding shorthand was zer
   .card .c-micro { width: 100%; max-width: 280px; }
   .card .label { font-size: 15px; line-height: 2; }
   .card .journal { height: 36px; }
+  .card .journal[src*="ijhsr"] { height: 40px; }
   .big-links { grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
   .big-link { font-size: 18px; line-height: 1.3; padding: 16px 10px; border-radius: 20px; }
   .site-footer.slim .footer-slim { height: auto; padding: 16px; flex-wrap: wrap; gap: 12px 18px; font-size: 16px; }
@@ -415,6 +417,7 @@ main.container { padding-bottom: 9rem; } /* .container padding shorthand was zer
 .journal-cta .btn { min-width: 15.9rem; }
 .journal-cta img { mix-blend-mode: multiply; }
 .journal-cta.one img { height: 5.4rem; }
+.journal-cta img[src*="ijhsr"] { height: 5.1rem; }
 .journal-cta.one .btn { min-width: 17rem; font-size: 1.88rem; line-height: 3.3rem; }
 @media (max-width: 1000px) {
   .si-innov, .ar-top { grid-template-columns: 1fr 1fr; }
